@@ -1,5 +1,6 @@
 var WebSocket = require('ws');
 var querystring = require("querystring")
+var errorlog = require("./readerror")
 var url = "wss://real.okcoin.com:10440/websocket";
 var url2 = "wss://real.okcoin.com:10440/websocket/okcoinapi";
 
@@ -68,7 +69,7 @@ ws.onmessage = function (evt) {
     var msg = JSON.parse(wsdata)
     var info = msg['data']
     if(info)
-    console.log("info: " + info['error_code'])
+    console.log("info: " + errorlog.er[info["error_code"].toString()])
     if(msg['event'] && msg['event'] == 'pong'){
         setTimeout(function () {
             ws.send(JSON.stringify({'event':'ping'}))
