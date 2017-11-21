@@ -28,7 +28,7 @@ var md5 = function(data) {
     return crypto.createHash("md5WithRSAEncryption").update(str).digest("hex");
 }
 
-var resault = md5('api_key=44dcb2ba-ba19-4c1a-93b3-44fd817f735d&secret_key=8412D84686C09CA6E54CAADFDA4EC7D1');
+var resault = md5('api_key=44dcb2ba-ba19-4c1a-93b3-44fd817f735d&secret_key=8412D84686C09CA6E54CAADFDA4EC7D1a');
 var res1 = resault.toUpperCase();
 console.log("resault: " + resault)
 var content = {
@@ -59,8 +59,16 @@ ws.onopen = function () {
 };
 
 ws.onmessage = function (evt) {
-    console.log("onmessage: " + evt.data)
-    var msg = JSON.parse(evt.data)
+    console.log("evt type: " + evt.type + " evt data: " + evt.data)
+    var wsdata = evt.data
+    if(wsdata.charAt(0) == '['){
+        wsdata = wsdata.substr(1,evt.data.length-2);
+        console.log("==> [: " + wsdata);
+    }
+    var msg = JSON.parse(wsdata)
+    var info = msg['data']
+    if(info)
+    console.log("info: " + info['error_code'])
     if(msg['event'] && msg['event'] == 'pong'){
         setTimeout(function () {
             ws.send(JSON.stringify({'event':'ping'}))
