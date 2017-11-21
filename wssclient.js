@@ -55,11 +55,18 @@ var ws = new WebSocket(url2);
 
 ws.onopen = function () {
     ws.send(JSON.stringify(content));
-    //ws.send(JSON.stringify({'pong':'ping'}))
+    ws.send(JSON.stringify({'event':'ping'}))
 };
 
 ws.onmessage = function (evt) {
     console.log("onmessage: " + evt.data)
+    var msg = JSON.parse(evt.data)
+    if(msg['event'] && msg['event'] == 'pong'){
+        setTimeout(function () {
+            ws.send(JSON.stringify({'event':'ping'}))
+        }, 5000 * 3)
+    }
+
 };
 
 ws.onclose = function (evt) {
