@@ -32,13 +32,18 @@ var md5 = function(data) {
 var resault = md5('api_key=44dcb2ba-ba19-4c1a-93b3-44fd817f735d&secret_key=8412D84686C09CA6E54CAADFDA4EC7D1a');
 var res1 = resault.toUpperCase();
 console.log("resault: " + resault)
-var content = {
+var contentuser = {
     'event': 'addChannel',
     'channel': 'ok_spot_userinfo',
     'parameters': {
         'api_key': api_key,
         'sign': res1
     }
+}
+
+var content = {
+    'event': 'addChannel',
+    'channel': 'ok_sub_spot_btc_usd_ticker',
 }
 
 
@@ -67,9 +72,13 @@ ws.onmessage = function (evt) {
         console.log("==> [: " + wsdata);
     }
     var msg = JSON.parse(wsdata)
+
     var info = msg['data']
-    if(info)
-    console.log("info: " + errorlog.er[info["error_code"].toString()])
+    if(info){
+       // console.log("info: " + info("error_code"))
+        //console.log("info: " + errorlog.er[info["error_code"].toString()])
+    }
+
     if(msg['event'] && msg['event'] == 'pong'){
         setTimeout(function () {
             ws.send(JSON.stringify({'event':'ping'}))
