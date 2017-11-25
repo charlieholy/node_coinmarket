@@ -8,7 +8,8 @@
   },
   "dependencies": {
     "iconv-lite": "0.4.19",
-    "ws":"3.3.2"
+    "ws": "3.3.2",
+    "pako": "1.0.6"
   },
   "repository": {
     "type": "git",
