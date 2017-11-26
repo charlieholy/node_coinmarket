@@ -1,6 +1,6 @@
 exports.channel = {
     'event': 'addChannel',
-    'channel': 'ok_spot_userinfo',
+    'channel': '',
     'parameters': {
         'api_key': "",
         'sign': ""
