@@ -12,7 +12,14 @@ var f = function () {
     //ws.send(JSON.stringify(proto.reqsub("add","kline")))
 }
 var freq = function () {
-    ws.send(JSON.stringify(proto.req(proto.reqm.login)))
+    var login = proto.req("login")
+    var userinfo = proto.req(proto.oppo.add,"userinfo")
+    var order = proto.req(proto.oppo.add,"order",proto.order)
+    //var userinfo = JSON.stringify(proto.req(proto.oppo.add,"userinfo"))
+    //var userinfo = JSON.stringify(proto.req(proto.oppo.add,"userinfo"))
+    ws.send(login)
+    ws.send(userinfo)
+    ws.send(order)
 }
 var f2 = function () {
     console.log(new Date())

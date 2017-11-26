@@ -4,6 +4,8 @@ var pong ={'event':'pong'}
 var timeout = 25 * 1000
 var apiKey = "dcb686ef-dff2-4699-932b-c1ae9a8e9963"
 var secretKey = "0A9AA2DCB93F5B3D017C876070E3C333"
+//var apiKey = "44dcb2ba-ba19-4c1a-93b3-44fd817f735d"
+//var secretKey = "8412D84686C09CA6E54CAADFDA4EC7D1"
 var url = "wss://real.okex.com:10441/websocket";
 var channel_ = {
     'event': 'addChannel',
@@ -51,6 +53,7 @@ class proto{
         this.timeout = timeout
         this.order = order_
         this.reqm = reqm_
+        this.oppo = oppo_
     }
 
     reqsub(oppo,sub){
@@ -61,31 +64,33 @@ class proto{
     }
 
     req(event,req,param){
-        channel_.event = event
-        channel_.channel = reqm_[req]
+        var cel = JSON.parse(JSON.stringify(channel_));
+        cel.event = event
+        cel.channel = reqm_[req]
         for(var v in param){
-            channel_.parameters[v] = param[v]
+            cel.parameters[v] = param[v]
         }
         var str = ""
-        for(var vv of Object.keys(channel_.parameters).sort()){
-            str += vv + "=" + channel_.parameters[vv] + "&"
+        for(var vv of Object.keys(cel.parameters).sort()){
+            str += vv + "=" + cel.parameters[vv] + "&"
         }
         str += "secret_key=" + secretKey
         console.log(str)
         var re = md5.md5(str).toUpperCase()
         //console.log(re)
-        channel_.parameters.sign = re;
-        console.log(JSON.stringify(channel_))
-        return channel_
+        cel.parameters.sign = re;
+        var result = JSON.stringify(cel)
+        console.log("result: " + result)
+        return result
     }
 
 }
 module.exports = proto
 
-var p = new proto()
-var pa = {}
-pa.symbol = "btc_usdt"
-pa.type = "buy"
-pa.price = "50"
-pa.amount = "0.02"
-p.req("order")
+// var p = new proto()
+// var pa = {}
+// pa.symbol = "btc_usdt"
+// pa.type = "buy"
+// pa.price = "50"
+// pa.amount = "0.02"
+// p.req("login")
