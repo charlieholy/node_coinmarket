@@ -1,6 +1,6 @@
 var WebSocket = require('ws')
 
-exports.wsclient = function (url,onconnect,callback) {
+exports.wsclient = function (url,onconnect,callback,op) {
 
     ws = new WebSocket(url);
 

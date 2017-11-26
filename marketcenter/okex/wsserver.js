@@ -10,11 +10,15 @@ class wsserver{
     connect(){
         this.wsc.wsclient(p_.url,function(conn){
             wscli = conn
+            wscli.send(p_.ping)
                 console.log("conn")
             },function (info,evt) {
                 var wsdata = evt.data
                 console.log(info,wsdata)
-            })
+                if(wsdata == p_.pong){
+                    setTimeout(function(){wscli.send(p_.ping)},p_.timeout);
+                }
+            },wsserver.this)
     }
 
     send(msg) {

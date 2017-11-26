@@ -5,19 +5,19 @@ proto = new proto_()
 ws.connect()
 var f = function () {
     console.log(new Date())
-    ws.send(JSON.stringify(proto.gettick("add","tick")))
-    ws.send(JSON.stringify(proto.gettick("add","depth")))
-    ws.send(JSON.stringify(proto.gettick("add","depthY")))
-    ws.send(JSON.stringify(proto.gettick("add","deal")))
-    ws.send(JSON.stringify(proto.gettick("add","kline")))
+    //ws.send(JSON.stringify(proto.reqsub("add","tick")))
+    //ws.send(JSON.stringify(proto.reqsub("add","depth")))
+    //ws.send(JSON.stringify(proto.reqsub("add","depthY")))
+    //ws.send(JSON.stringify(proto.reqsub("add","deal")))
+    //ws.send(JSON.stringify(proto.reqsub("add","kline")))
 }
 var f2 = function () {
     console.log(new Date())
-    //ws.send(JSON.stringify(proto.gettick("remove","tick")))
-    //ws.send(JSON.stringify(proto.gettick("remove","depth")))
-    //ws.send(JSON.stringify(proto.gettick("remove","depthY")))
-    //ws.send(JSON.stringify(proto.gettick("remove","deal")))
-    //ws.send(JSON.stringify(proto.gettick("remove","kline")))
+    //ws.send(JSON.stringify(proto.reqsub("remove","tick")))
+    //ws.send(JSON.stringify(proto.reqsub("remove","depth")))
+    //ws.send(JSON.stringify(proto.reqsub("remove","depthY")))
+    //ws.send(JSON.stringify(proto.reqsub("remove","deal")))
+    //ws.send(JSON.stringify(proto.reqsub("remove","kline")))
 }
 setTimeout(f,1000);
 setTimeout(f2,2000);

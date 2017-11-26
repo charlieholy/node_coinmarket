@@ -1,4 +1,7 @@
 var channel_ = require("./channel")
+var ping ={'event':'ping'}
+var pong ={'event':'pong'}
+var timeout = 25 * 1000
 var oppo_ = {
     "add":"addChannel",
     "remove":"removeChannel"
@@ -18,9 +21,12 @@ class proto{
 
     constructor(){
         this.url = url
+        this.ping = JSON.stringify(ping)
+        this.pong = JSON.stringify(pong)
+        this.timeout = timeout
     }
 
-    gettick(oppo,sub){
+    reqsub(oppo,sub){
         channel_.channel.event = oppo_[oppo]
         channel_.channel.channel = sub_[sub]
         console.log(JSON.stringify(channel_.channel))
