@@ -1,12 +1,13 @@
 var https = require("https");
 var proto = require("./proto")
 var p = new proto();
-var param = p.getparams(p.cmd["user"])
+//var url = p.getUrl(p.cmd["user"],p.method["get"])
+var url = p.getUrl(p.cmd["acount"],p.method["get"])
 
-var re = p.head + p.url + p.cmd["user"] + "?" + param
-console.log("re: " + re)
+//var re = p.head + p.url + p.cmd["user"] + "?" + param
+console.log("url " + url)
 
-https.get(re, function (res) {
+https.get(url, function (res) {
     var datas = [];
     var size = 0;
     res.on('data', function (data) {

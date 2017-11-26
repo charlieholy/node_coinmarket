@@ -5,7 +5,12 @@ https = "https://"
 url = "api.huobi.pro"
 cmd = {
     "user" : "/v1/users/user",
-    "acount" : "/v1/account/accounts"
+    "acount" : "/v1/account/accounts",
+    "order" : "/v1/order/orders"
+}
+method = {
+    "get":"GET",
+    "post":"POST"
 }
 class proto{
     constructor(){
@@ -13,9 +18,14 @@ class proto{
         this.cmd = cmd
         this.url= url
         this.head = https
+        this.method = method
     }
 
-    getparams(cmd){
+    getUrl(cmd,method){
+        return   https + url + cmd + "?" + this.getparams(cmd,method)
+    }
+
+    getparams(cmd,method){
         var pa = ""
         var pams = this.params.prototype
         for(var v of Object.keys(pams).sort()){
@@ -26,17 +36,18 @@ class proto{
             pa += (v + "=" + value  + '&')
         }
         pa =  pa.substring(0,pa.length-1)
-        var sign = this.getSign(this.params.api_secret,cmd,pa)
+        var sign = this.getSign(this.params.api_secret,cmd,pa,method)
         pa += "&Signature=" + sign;
         console.log("sign: " + pa)
         return pa
 
     }
 
-    getSign(secret,cmd,content){
-        var signcontent = "GET\n" +
+    getSign(secret,cmd,content,method){
+        var signcontent = method + "\n" +
             url+ "\n" +
             cmd + "\n" + content;
+        console.log("signcontent: " + signcontent)
         var signture = crypto
             .createHmac('sha256', secret)
             .update(signcontent)
