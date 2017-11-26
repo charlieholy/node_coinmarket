@@ -1,10 +1,12 @@
-var WebSocket = require('ws');
-var wsclient = function (url,callback) {
+var WebSocket = require('ws')
+
+exports.wsclient = function (url,onconnect,callback) {
 
     ws = new WebSocket(url);
 
     ws.onopen = function () {
         console.log("onopen")
+        onconnect(ws)
     };
 
     ws.onmessage = function (evt) {
@@ -19,7 +21,8 @@ var wsclient = function (url,callback) {
         callback("onerror",evt)
     };
 }
-url = "ws://121.40.165.18:8088"
-wsclient(url,function (info,evt) {
-    console.log(info,evt);
-})
+// url = "ws://121.40.165.18:8088"
+// wsclient(url,function (info,evt) {
+//     console.log(info,evt);
+// })
+
