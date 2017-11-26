@@ -1,6 +1,6 @@
 var buffer = require("buffer")
 var crypto = require("crypto")
-exports.md5 = function () {
+exports.md5 = function (data) {
     var Buffer = buffer.Buffer;
     var buf = new Buffer(data);
     var str = buf.toString("binary");

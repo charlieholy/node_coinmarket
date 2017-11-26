@@ -11,6 +11,9 @@ var f = function () {
     //ws.send(JSON.stringify(proto.reqsub("add","deal")))
     //ws.send(JSON.stringify(proto.reqsub("add","kline")))
 }
+var freq = function () {
+    ws.send(JSON.stringify(proto.req(proto.reqm.login)))
+}
 var f2 = function () {
     console.log(new Date())
     //ws.send(JSON.stringify(proto.reqsub("remove","tick")))
@@ -21,4 +24,5 @@ var f2 = function () {
 }
 setTimeout(f,1000);
 setTimeout(f2,2000);
+setTimeout(freq,2000);
 
