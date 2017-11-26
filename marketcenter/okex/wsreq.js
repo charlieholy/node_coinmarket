@@ -7,6 +7,8 @@ wsc_.wsclient(p_.url,function(conn){
         console.log("conn")
         wspush.send(JSON.stringify(p_.gettick()))
     },function (info,evt) {
-        console.log(info,evt)
+        var wsdata = evt.data
+        console.log(info,wsdata)
     }
 )
+
