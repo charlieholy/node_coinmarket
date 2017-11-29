@@ -4,7 +4,6 @@ let pako = require('pako');
 let symbol = 'btcusdt';
 const socket = new WebSocket('wss://api.huobi.pro/ws'); //如果symbol = 'btccny'或者'ltccny' 请使用wss://api.huobi.com/ws
 
-socket.binaryType = 'arraybuffer';
 
 socket.onopen = function (event) {
     console.log('WebSocket connect at time: ' + new Date());
